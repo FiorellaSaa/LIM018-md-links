@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const path = require('path');
 
@@ -13,7 +12,7 @@ function routeExists(route) {
   if (routeVerify) {
     return route;
   }
-  return 'Err: La ruta no existe';
+  return 'Err: the route does not exist';
 }
 console.log(routeExists(ruta1));
 console.log(routeExists(ruta2));
@@ -24,26 +23,26 @@ function routeAbsolute(route) {
   if (routeAbsoluteVerify) {
     return route;
   }
-  return 'La ruta es relativa';
+  return 'The path is relative';
 }
 console.log(routeAbsolute(ruta1));
 console.log(routeAbsolute(rutaAbsolute));
 
 // convertir una ruta relativa a abosluta
-function convertRoute(route) {
+function convertRouteToAbsolute(route) {
   return path.resolve(route);
 }
-console.log('Ruta convertida a absoluta', convertRoute(ruta1));
+console.log('Route converted to absolute', convertRouteToAbsolute(ruta1));
 
 // Extensión .md
-function mdExtention(route) {
-  const routeExt = path.extname(route);
+function fileExtension(routeFile) {
+  const routeExt = path.extname(routeFile);
   if (routeExt === '.md') {
     return routeExt;
   }
-  return 'No es de extensión md';
+  return 'It is not .md extension';
 }
-console.log(mdExtention(ruta3));
+console.log(fileExtension(ruta3));
 
 // Leyendo data del archivo prueba.md-síncrono
 function readContent(route) {
@@ -56,11 +55,10 @@ function readContent(route) {
 }
 console.log(readContent(ruta1));
 
-
 module.exports = {
   routeExists,
   routeAbsolute,
-  convertRoute,
-  mdExtention,
+  convertRouteToAbsolute,
+  fileExtension,
   readContent,
 };
