@@ -110,6 +110,32 @@ function storeLinks(arrayLinks, route) {
     console.log(error)
   }); */
 
+function makeHttpRequest(arrayObject) {
+  const getArray = arrayObject.map((element) => {
+    const runAxios = axios.get(element.href)
+      .then((response) => ({
+        ...element,
+        status: response.status,
+        message: response.statusText,
+      }))
+      .catch((error) => ({
+        ...element,
+        // status: error.response.status,
+        // status: error.response ? error.response.status : (error.request ? error.request : '500'),
+        // message: error.response.statusText,
+        status: 'Fail request',
+        message: 'fail',
+        // statusCode: 404,
+      // statusMessage: 'Not Found',
+      }));
+    return runAxios;
+  });
+  return Promise.all(getArray);
+}
+/* makeHttpRequest(storeLinks(getLinks(ruta1), ruta1)).then((response) => {
+  console.log(response);
+}); */
+
 const sampleArrays = [
   {
     text: 'Link npm-install',
