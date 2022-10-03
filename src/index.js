@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+const { link } = require('fs/promises');
 
 const ruta1 = './prueba/prueba.md';
 const ruta2 = './prueba/prueba2.md';
@@ -109,32 +110,6 @@ function storeLinks(arrayLinks, route) {
     console.log(error)
   }); */
 
-function makeHttpRequest(arrayObject) {
-  const getArray = arrayObject.map((element) => {
-    const runAxios = axios.get(element.href)
-      .then((response) => ({
-        ...element,
-        status: response.status,
-        message: response.statusText,
-      }))
-      .catch((error) => ({
-        ...element,
-        // status: error.response.status,
-        // status: error.response ? error.response.status : (error.request ? error.request : '500'),
-        // message: error.response.statusText,
-        status: 'Fail request',
-        message: 'fail',
-        // statusCode: 404,
-      // statusMessage: 'Not Found',
-      }));
-    return runAxios;
-  });
-  return Promise.all(getArray);
-}
-/* makeHttpRequest(storeLinks(getLinks(ruta1), ruta1)).then((response) => {
-  console.log(response);
-}); */
-
 const sampleArrays = [
   {
     text: 'Link npm-install',
@@ -188,12 +163,12 @@ console.log('Total:', statsVerify(sampleArrays));
 
 // Unique Stats
 /* const uniqueVerify = (arrayLinks) => {
-  const uniqueLinks = arrayLinks.filter((item, index) => arrayLinks.indexOf(item)===index);
+  const uniqueLinks = arrayLinks.filter((item, index) => arrayLinks.indexOf(item) === index);
   return (uniqueLinks);
 };
 console.log('Unique:', uniqueVerify(sampleArrays)); */
 
-const uniqueVerify = (arrayLinks) => {
+/* const uniqueVerify = (arrayLinks) => {
   const conteinerElem = [];
   const uniqueLinks = arrayLinks.reduce((elem, item) => {
     if (elem.href !== item.href) {
@@ -203,8 +178,7 @@ const uniqueVerify = (arrayLinks) => {
   });
   return uniqueLinks;
 };
-console.log('Unique', uniqueVerify(sampleArrays));
-
+console.log('Unique', uniqueVerify(sampleArrays)); */
 
 // Broken Stats
 const brokenVerify = (arrayLinks) => {
@@ -212,8 +186,6 @@ const brokenVerify = (arrayLinks) => {
   return statusBroken.length;
 };
 console.log('Broken:', brokenVerify(sampleArrays));
-
-
 
 module.exports = {
   routeExists,
@@ -223,8 +195,6 @@ module.exports = {
   readContent,
   getLinks,
   storeLinks,
-  makeHttpRequest,
   statsVerify,
-  uniqueVerify,
   brokenVerify,
 };
