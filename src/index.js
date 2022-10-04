@@ -57,16 +57,34 @@ function readContent(route) {
 }
 // console.log(readContent(ruta1));
 
+// Verificar si es un directorio
+const isDirectory = (route) => fs.lstatSync(route).isDirectory();
+// console.log(isDirectory(rutaDir));
+
+// Verificar si es un archivo
+const isFile = (route) => fs.lstatSync(route).isFile();
+// console.log(isFile(rutaDir));
 // Leer archivos de un directorio
-function readDirectory(route) {
-  const routeDir = fs.readdirSync(route);
-  if (routeDir) {
-    return routeDir;
-  }
-  return 'it is a file';
-}
+
+const readDirectory = (route) => fs.readdirSync(route);
 // console.log(readDirectory(rutaDir));
 
+// Recursión para obtener los archivos
+const recursionToObtainFiles = (route) => {
+  const storeFiles = [];
+  if (isFile(route)) {
+    return route;
+  }
+  const readFilesOfDirectory = readDirectory(route);
+  readFilesOfDirectory.forEach((file) => {
+    const newRoute = path.join(route, file);
+    storeFiles.push(recursionToObtainFiles(newRoute));
+  });
+  return storeFiles;
+};
+console.log(recursionToObtainFiles(rutaDir));
+
+// Función para obtener los links
 function getLinks(route) {
   const methodReadFile = readContent(route);
   const regularExpression = /\[(.+)\]\((https?:\/\/.+)\)/gi;
@@ -76,6 +94,7 @@ function getLinks(route) {
 }
 // console.log(getLinks(ruta1));
 
+// Función para almacenar los links en un array
 function storeLinks(arrayLinks, route) {
   const newArray = [];
   if (arrayLinks.length > 0) {
@@ -108,7 +127,7 @@ function storeLinks(arrayLinks, route) {
     // console.log(error.response.statusText);
     console.log(error)
   }); */
-
+// Función para realizar petición http
 function makeHttpRequest(arrayObject) {
   const getArray = arrayObject.map((element) => {
     const runAxios = axios.get(element.href)
@@ -122,7 +141,7 @@ function makeHttpRequest(arrayObject) {
         // status: error.response.status,
         // status: error.response ? error.response.status : (error.request ? error.request : '500'),
         // message: error.response.statusText,
-        status: 'Fail request',
+        status: 404,
         message: 'fail',
         // statusCode: 404,
       // statusMessage: 'Not Found',
@@ -135,96 +154,16 @@ function makeHttpRequest(arrayObject) {
   console.log(response);
 }); */
 
-const sampleArrays = [
-  {
-    text: 'Link npm-install',
-    href: 'https://docs.npmjs.com/cli/v8/commands/npm-install',
-    file: './prueba/prueba.md',
-    status: 200,
-    message: 'OK',
-  },
-  {
-    text: 'Link package-json',
-    href: 'https://docs.npmjs.com/cli/v8/configuring-npm/package-json',
-    file: './prueba/prueba.md',
-    status: 200,
-    message: 'OK',
-  },
-  {
-    text: 'Link npm-install',
-    href: 'https://docs.npmjs.com/cli/v8/commands/npm-install',
-    file: './prueba/prueba.md',
-    status: 200,
-    message: 'OK',
-  },
-  {
-    text: 'Link package-json',
-    href: 'https://docs.npmjs.com/cli/v8/configuring-npm/package-json',
-    file: './prueba/prueba.md',
-    status: 200,
-    message: 'OK',
-  },
-  {
-    text: 'Link node.js',
-    href: 'https://nodejs.org/api/fs.html',
-    file: './prueba/prueba.md',
-    status: 200,
-    message: 'OK',
-  },
-  {
-    text: 'Link node.js',
-    href: 'https://nodejs/api/fs.html',
-    file: './prueba/prueba.md',
-    status: 404,
-    message: 'fail',
-  },
-];
-// Total Stats
-const statsVerify = (arrayLinks) => {
-  const totalLinks = arrayLinks.length;
-  return totalLinks;
-};
-console.log('Total:', statsVerify(sampleArrays));
-
-// Unique Stats
-/* const uniqueVerify = (arrayLinks) => {
-  const uniqueLinks = arrayLinks.filter((item, index) => arrayLinks.indexOf(item)===index);
-  return (uniqueLinks);
-};
-console.log('Unique:', uniqueVerify(sampleArrays)); */
-
-const uniqueVerify = (arrayLinks) => {
-  const conteinerElem = [];
-  const uniqueLinks = arrayLinks.reduce((elem, item) => {
-    if (elem.href !== item.href) {
-      conteinerElem.push(item);
-    }
-    return conteinerElem;
-  });
-  return uniqueLinks;
-};
-console.log('Unique', uniqueVerify(sampleArrays));
-
-
-// Broken Stats
-const brokenVerify = (arrayLinks) => {
-  const statusBroken = arrayLinks.filter((item) => item.status >= 400);
-  return statusBroken.length;
-};
-console.log('Broken:', brokenVerify(sampleArrays));
-
-
-
 module.exports = {
   routeExists,
   routeAbsolute,
   convertRouteToAbsolute,
   fileExtension,
   readContent,
+  isDirectory,
+  isFile,
+  readDirectory,
   getLinks,
   storeLinks,
   makeHttpRequest,
-  statsVerify,
-  uniqueVerify,
-  brokenVerify,
 };
