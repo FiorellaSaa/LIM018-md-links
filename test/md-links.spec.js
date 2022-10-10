@@ -1,15 +1,15 @@
-const mdLinks = require('..');
-const { routeExists } = require('../index.js');
-const { routeAbsolute } = require('../index.js');
-const { convertRouteToAbsolute } = require('../index.js');
-const { fileExtension } = require('../index.js');
-const { readContent } = require('../index.js');
+// const mdLinks = require('..');
+const { routeExists } = require('../src/index');
+const { routeAbsolute } = require('../src/index');
+const { convertRouteToAbsolute } = require('../src/index');
+const { fileExtension } = require('../src/index');
+const { readContent } = require('../src/index');
 
-describe('mdLinks', () => {
+/* describe('mdLinks', () => {
   it('should...', () => {
     console.log('FIX ME!');
   });
-});
+}); */
 
 describe('routeExists', () => {
   it('Should be a function', () => {
@@ -81,3 +81,7 @@ describe('readContent', () => {
     expect(method).toBe('');
   });
 });
+// Directorio
+// array Links
+// Petición http --> mock
+// mdLinks
