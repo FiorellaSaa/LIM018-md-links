@@ -124,44 +124,6 @@ function storeLinks(arrayLinks, route) {
 }
 // console.log(storeLinks(getLinks(ruta1), ruta1));
 
-/* axios.get('https://docs.npmjs.com/v8/commands/npm-install')
-  .then((response) => {
-    //console.log(response.status);
-    // console.log(response.statusText);
-    console.log(response);
-  })
-  .catch((error) => {
-    // console.log(error.response.status);
-    // console.log(error.response.statusText);
-    console.log(error)
-  }); */
-
-// Función para realizar petición http
-/* function makeHttpRequest(arrayObject) {
-  const getArray = arrayObject.map((element) => {
-    const runAxios = axios.get(element.href)
-      .then((response) => ({
-        ...element,
-        status: response.status,
-        message: response.statusText,
-      }))
-      .catch((error) => ({
-        ...element,
-        // status: error.response.status,
-        // status: error.response ? error.response.status : (error.request ? error.request : '500'),
-        // message: error.response.statusText,
-        status: 'Fail request',
-        message: 'fail',
-        // statusCode: 404,
-      // statusMessage: 'Not Found',
-      }));
-    return runAxios;
-  });
-  return Promise.all(getArray);
-}
-makeHttpRequest(storeLinks(getLinks(ruta1), ruta1)).then((response) => {
-  console.log(response);
-}); */
 const makeHttpRequest = (arrayObject) => {
   const getArray = [];
   for (let i = 0; i < arrayObject.length; i++) {
