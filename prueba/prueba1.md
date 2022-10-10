@@ -1,1 +1,1 @@
-[Link node.js](https://nodejs.org/api/fs.html)
+[How to Mock dependencies with Jest](https://dev.to/this-is-learning/how-to-mock-dependencies-with-jest-457l)
