@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable-loop */
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
@@ -44,7 +45,7 @@ function fileExtension(route) {
   }
   return 'It is not .md extension';
 }
-// console.log(fileExtension(ruta3));
+// console.log(fileExtension('./prueba/prueba1.md'));
 
 // Leyendo data del archivo prueba.md-síncrono
 function readContent(route) {
@@ -56,7 +57,6 @@ function readContent(route) {
   }
 }
 // console.log(readContent(ruta1));
-
 // Verificar si es un directorio
 const isDirectory = (route) => fs.lstatSync(route).isDirectory();
 // console.log(isDirectory(rutaDir));
@@ -64,25 +64,33 @@ const isDirectory = (route) => fs.lstatSync(route).isDirectory();
 // Verificar si es un archivo
 const isFile = (route) => fs.lstatSync(route).isFile();
 // console.log(isFile(rutaDir));
-// Leer archivos de un directorio
 
+// Leer archivos de un directorio
 const readDirectory = (route) => fs.readdirSync(route);
 // console.log(readDirectory(rutaDir));
+// [ 'prueba.html', 'prueba.md', 'prueba.text', 'prueba1.md' ]
 
 // Recursión para obtener los archivos
 const recursionToObtainFiles = (route) => {
   const storeFiles = [];
   if (isFile(route)) {
-    return route;
+    storeFiles.push(route);
+    return storeFiles;
   }
   const readFilesOfDirectory = readDirectory(route);
-  readFilesOfDirectory.forEach((file) => {
-    const newRoute = path.join(route, file);
-    storeFiles.push(recursionToObtainFiles(newRoute));
-  });
-  return storeFiles;
+  for (let i = 0; i < readFilesOfDirectory.length; i++) {
+    const readArrayFiles = path.join(route, readFilesOfDirectory[i]);
+    storeFiles.push(recursionToObtainFiles(readArrayFiles));
+  }
+  return storeFiles.flat();
 };
-console.log(recursionToObtainFiles(rutaDir));
+// console.log(recursionToObtainFiles(rutaDir));
+/* [
+  'prueba\\prueba.html',
+  'prueba\\prueba.md',
+  'prueba\\prueba.text',
+  'prueba\\prueba1.md'
+] */
 
 // Función para obtener los links
 function getLinks(route) {
@@ -92,7 +100,7 @@ function getLinks(route) {
   const arrayLinks = methodReadFile.match(regularExpression);
   return arrayLinks;
 }
-// console.log(getLinks(ruta1));
+// console.log(getLinks('./prueba/prueba1.md'));
 
 // Función para almacenar los links en un array
 function storeLinks(arrayLinks, route) {
@@ -127,8 +135,9 @@ function storeLinks(arrayLinks, route) {
     // console.log(error.response.statusText);
     console.log(error)
   }); */
+
 // Función para realizar petición http
-function makeHttpRequest(arrayObject) {
+/* function makeHttpRequest(arrayObject) {
   const getArray = arrayObject.map((element) => {
     const runAxios = axios.get(element.href)
       .then((response) => ({
@@ -141,7 +150,7 @@ function makeHttpRequest(arrayObject) {
         // status: error.response.status,
         // status: error.response ? error.response.status : (error.request ? error.request : '500'),
         // message: error.response.statusText,
-        status: 404,
+        status: 'Fail request',
         message: 'fail',
         // statusCode: 404,
       // statusMessage: 'Not Found',
@@ -150,6 +159,29 @@ function makeHttpRequest(arrayObject) {
   });
   return Promise.all(getArray);
 }
+makeHttpRequest(storeLinks(getLinks(ruta1), ruta1)).then((response) => {
+  console.log(response);
+}); */
+const makeHttpRequest = (arrayObject) => {
+  const getArray = [];
+  for (let i = 0; i < arrayObject.length; i++) {
+    const element = arrayObject[i];
+    const runAxios = axios
+      .get(element.href)
+      .then((response) => ({
+        ...element,
+        status: response.status,
+        message: response.statusText,
+      }))
+      .catch((error) => ({
+        ...element,
+        status: 404,
+        message: 'fail',
+      }));
+    getArray.push(runAxios);
+  }
+  return Promise.all(getArray);
+};
 /* makeHttpRequest(storeLinks(getLinks(ruta1), ruta1)).then((response) => {
   console.log(response);
 }); */
@@ -163,6 +195,7 @@ module.exports = {
   isDirectory,
   isFile,
   readDirectory,
+  recursionToObtainFiles,
   getLinks,
   storeLinks,
   makeHttpRequest,
