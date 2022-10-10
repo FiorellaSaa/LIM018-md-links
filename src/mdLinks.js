@@ -23,9 +23,9 @@ function mdLinks(route, options = { validate: false }) {
           if (fileExtension(fileRoute) === '.md') {
           // console.log(fileExtension(fileRoute));
             if (options.validate === true) {
-              return resolve(makeHttpRequest(storeLinks(getLinks(fileRoute), fileRoute)));
+              resolve(makeHttpRequest(storeLinks(getLinks(fileRoute), fileRoute)));
             }
-            return resolve((storeLinks(getLinks(fileRoute), fileRoute)));
+            resolve((storeLinks(getLinks(fileRoute), fileRoute)));
           }
         });
       }
