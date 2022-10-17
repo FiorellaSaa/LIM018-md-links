@@ -1,4 +1,5 @@
-const sampleArrays = [
+
+/* const sampleArrays = [
   {
     text: 'Link npm-install',
     href: 'https://docs.npmjs.com/cli/v8/commands/npm-install',
@@ -41,50 +42,30 @@ const sampleArrays = [
     status: 404,
     message: 'fail',
   },
-];
-  // Total Stats
-const statsVerify = (arrayLinks) => {
+]; */
+// Total Stats
+const totalStatsVerify = (arrayLinks) => {
   const totalLinks = arrayLinks.length;
   return totalLinks;
 };
-console.log('Total:', statsVerify(sampleArrays));
+// console.log('Total:', totalStatsVerify(sampleArrays));
 
 // Unique Stats
-/* const uniqueVerify = (arrayLinks) => {
-  const uniqueLinks = arrayLinks.filter((item, index) => {
-    console.log(arrayLinks.indexOf(item), index)
-   return  arrayLinks.indexOf(item) === index});
-  return (uniqueLinks);
-}; */
-
-// Unique Stats
-const uniqueVerify = (arrayLinks) => {
+const uniqueLinksStats = (arrayLinks) => {
   const uniqueLinks = new Set(arrayLinks.map((elem) => elem.href)).size;
   return uniqueLinks;
 };
-console.log('Unique:', uniqueVerify(sampleArrays));
-
-/* const uniqueVerify = (arrayLinks) => {
-  const conteinerElem = [];
-  const uniqueLinks = arrayLinks.reduce((elem, item) => {
-    if (elem.href !== item.href) {
-      conteinerElem.push(item);
-    }
-    return conteinerElem;
-  });
-  return uniqueLinks;
-};
-console.log('Unique', uniqueVerify(sampleArrays)); */
+// console.log('Unique:', uniqueLinksStats(sampleArrays));
 
 // Broken Stats
-const brokenVerify = (arrayLinks) => {
+const brokenLinks = (arrayLinks) => {
   const statusBroken = arrayLinks.filter((item) => item.status >= 400);
   return statusBroken.length;
 };
-console.log('Broken:', brokenVerify(sampleArrays));
+// console.log('Broken:', brokenLinks(sampleArrays));
 
 module.exports = {
-  statsVerify,
-  uniqueVerify,
-  brokenVerify,
+  totalStatsVerify,
+  uniqueLinksStats,
+  brokenLinks,
 };
