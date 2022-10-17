@@ -31,7 +31,7 @@
   "homepage": "https://github.com/FiorellaSaa/LIM018-md-links#readme",
   "dependencies": {
     "axios": "^0.27.2",
-    "chalk": "^5.1.2"
+    "chalk": "^4.1.2"
   },
   "bin": {
     "md-links": "./src/cli.js"
