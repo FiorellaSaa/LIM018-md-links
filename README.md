@@ -1,5 +1,21 @@
 # Markdown Links
 
+** Diagrama de flujo- API **
+![Diagrama-de-flujo-API]()
+** Diagrama de flujo- CLI **
+![Diagrama-de-flujo-CLI]()
+![error](./images/mdLinks.png)
+Si necesita ayuda ingrese ** Md-Links --help **
+![help](./images/mdLinks-help.png)
+** Md-Links path **
+![linksFound](./images/mdLinks-path.png)
+** Md-Links path --validate**
+![validate](./images/mdLinks-path-validate.png)
+** Md-Links path --stats**
+![stats](./images/mdLinks-path-stats.png)
+** Md-Links path --validate --stats**
+![validate-stats](./images/mdLinks-path-stats-validate.png)
+
 ## Índice
 
 * [1. Preámbulo](#1-preámbulo)
