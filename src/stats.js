@@ -1,4 +1,3 @@
-
 /* const sampleArrays = [
   {
     text: 'Link npm-install',
