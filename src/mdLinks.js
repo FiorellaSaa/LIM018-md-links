@@ -17,7 +17,7 @@ function routeExists(route) {
   }
   return 'Err: the route does not exist';
 }
-// console.log(routeExists(ruta1));
+// console.log(routeExists(rutaDir));
 // console.log(routeExists(ruta2));
 
 // Verificar si la ruta es abosluta
@@ -61,7 +61,7 @@ function readContent(route) {
   if (fileExtension(route) === '.md') {
     return fs.readFileSync(route, 'utf-8');
   }
-  return 'No links';
+  return 'No .md file';
 }
 // console.log(readContent(ruta1));
 
@@ -122,7 +122,11 @@ function getLinks(route) {
   return arrayLinks;
 }
 // console.log(getLinks('./prueba/prueba1.md'));
-
+/* [
+  '[How to Mock dependencies with Jest](https://dev.to/this-is-learning/how-to-mock-dependencies-with-jest-457l)',
+  '[ES6 Class Mocks](https://jestjs.io/docs/es6-class-mocks#the-4-ways-to-create-an-es6-class-mock)',
+  '[ES6 Class Mocks](https://jestjs/docs/es6-class-mocks#the-4-ways-to-create-an-es6-class-mock)'
+] */
 // Función para almacenar los links en un array
 function storeLinks(arrayLinks, route) {
   const newArray = [];
@@ -162,7 +166,7 @@ const makeHttpRequest = (arrayObject) => {
         status: response.status,
         message: response.statusText,
       }))
-      .catch((error) => ({
+      .catch(() => ({
         ...element,
         status: 404,
         message: 'fail',
