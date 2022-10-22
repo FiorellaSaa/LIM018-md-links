@@ -14,9 +14,9 @@ function mdLinks(route, options) {
     // Función para verificar si existe la ruta
     const verifyRoute = routeExists(route);
     // Función que convierte la ruta en absoluta
-    const absoluteRoute = convertRouteToAbsolute(verifyRoute);
     // Función que lee el archivo y valida
     if (verifyRoute) {
+      const absoluteRoute = convertRouteToAbsolute(verifyRoute);
       if (recursionToObtainFiles(absoluteRoute)) {
         const allArrays = recursionToObtainFiles(absoluteRoute);
         const newArraysMd = allArrays.filter((fileRoute) => fileExtension(fileRoute) === '.md');
@@ -35,13 +35,15 @@ function mdLinks(route, options) {
         }
       }
     } else {
-      reject(new Error('Err: the route does not exist'));
+      reject(new Error('the route does not exist'));
     }
   });
 }
-/* mdLinks('./prueba', { validate: true }).then((resolve) => {
+/* mdLinks('./prueba3', { validate: false }).then((resolve) => {
   console.log(resolve);
-}).catch((error) => { console.log(error); }); */
+}).catch((error) => {
+  console.log(error);
+}); */
 
 module.exports = {
   mdLinks,
