@@ -1,18 +1,29 @@
 # Markdown Links
 
+Librería que permite leer y analizar archivos en formato Markdown, verifica los links,
+su estado y estadísticas.
+
 ** Diagrama de flujo- API **
-![Diagrama-de-flujo-API]()
+*![Diagrama-de-flujo-API](./images/Diagrama%20API.jpg)
+
 ** Diagrama de flujo- CLI **
-![Diagrama-de-flujo-CLI]()
+*![Diagrama-de-flujo-CLI](./images/Diagrama%20CLI.jpg)
+
+** Al no poner una ruta **
 ![error](./images/mdLinks.png)
+
 Si necesita ayuda ingrese ** Md-Links --help **
 ![help](./images/mdLinks-help.png)
+
 ** Md-Links path **
 ![linksFound](./images/mdLinks-path.png)
+
 ** Md-Links path --validate**
 ![validate](./images/mdLinks-path-validate.png)
+
 ** Md-Links path --stats**
 ![stats](./images/mdLinks-path-stats.png)
+
 ** Md-Links path --validate --stats**
 ![validate-stats](./images/mdLinks-path-stats-validate.png)
 
