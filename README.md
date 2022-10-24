@@ -4,11 +4,11 @@ Librería que permite leer y analizar archivos en formato Markdown, verifica los
 su estado y estadísticas.
 
 ** Diagrama de flujo- API **
-![Diagrama-de-flujo-API]()
+![Diagrama-de-flujo-API](./images/Diagrama%20API.jpg)
 
 
 ** Diagrama de flujo- CLI **
-![Diagrama-de-flujo-CLI]()
+![Diagrama-de-flujo-CLI](./images/Diagrama%20CLI.jpg)
 
 
 ![error](./images/mdLinks.png)
