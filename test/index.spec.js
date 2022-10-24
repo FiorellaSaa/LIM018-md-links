@@ -7,17 +7,6 @@ describe('mdLinks', () => {
   it('Should be a function', () => {
     expect(typeof mdLinks).toBe('function');
   });
-  /* it.only('Should return a message if the route does not exist', (done) => {
-    const routefile = './pruebas/prueba3.md';
-   function prueba() {
-      mdLinks(routefile);
-    } 
-    // const getPromise = mdLinks(routefile);
-    mdLinks(routefile).catch((err) => {
-    expect(prueba).toThrow(new Error('the route does not exist'));
-    done();
-    // });
-  }, 500); */
   it('should return path --validate:true', () => {
     const sampleArray = [
       {
