@@ -47,15 +47,6 @@ function fileExtension(route) {
 }
 // console.log(fileExtension('./prueba/prueba1.md'));
 
-// Leyendo data del archivo prueba.md-síncrono
-/* function readContent(route) {
-  try {
-    const readContentFile = fs.readFileSync(route, 'utf-8');
-    return readContentFile;
-  } catch (error) {
-    return '';
-  }
-} */
 // Leyendo data del archivo
 function readContent(route) {
   if (fileExtension(route) === '.md') {
@@ -78,19 +69,6 @@ const readDirectory = (route) => fs.readdirSync(route);
 // console.log(readDirectory(rutaDir));
 // [ 'prueba.html', 'prueba.md', 'prueba.text', 'prueba1.md' ]
 
-/* function readDirectory(route) {
-  const filesMd = [];
-  for (let i = 0; i < readDirectory.length; i++) {
-    const filesExtension = path.extname(readDirectory[i]);
-    console.log(filesExtension);
-    if (filesExtension === '.md') {
-      filesMd.push(fs.readdirSync(route));
-    }
-  }
-  return filesMd;
-  return 'no hay archivos md';
-}
-console.log(readDirectory(rutaDir)); */
 // Recursión para obtener los archivos
 const recursionToObtainFiles = (route) => {
   const storeFiles = [];
