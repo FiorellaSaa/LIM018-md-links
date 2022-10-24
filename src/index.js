@@ -13,9 +13,9 @@ function mdLinks(route, options) {
   return new Promise((resolve, reject) => {
     // Función para verificar si existe la ruta
     const verifyRoute = routeExists(route);
-    // Función que convierte la ruta en absoluta
     // Función que lee el archivo y valida
     if (verifyRoute) {
+      // Función que convierte la ruta en absoluta
       const absoluteRoute = convertRouteToAbsolute(verifyRoute);
       if (recursionToObtainFiles(absoluteRoute)) {
         const allArrays = recursionToObtainFiles(absoluteRoute);
@@ -35,11 +35,11 @@ function mdLinks(route, options) {
     }
   });
 }
-mdLinks('./prueba3', { validate: false }).then((resolve) => {
+/* mdLinks('./prueba', { validate: false }).then((resolve) => {
   console.log(resolve);
 }).catch((error) => {
   console.log(error);
-});
+}); */
 
 module.exports = {
   mdLinks,
