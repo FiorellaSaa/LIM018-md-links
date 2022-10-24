@@ -39,7 +39,7 @@ function mdLinks(route, options) {
   console.log(resolve);
 }).catch((error) => {
   console.log(error);
-});*/
+}); */
 
 module.exports = {
   mdLinks,
